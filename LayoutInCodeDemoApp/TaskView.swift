@@ -63,7 +63,6 @@ class TaskView: UIView {
         addSubview(titleLabel)
 
         titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        titleLabel.text = "Rasion Project"
         titleLabel.textColor = .white
 
         titleLabel.snp.makeConstraints { make in
@@ -87,5 +86,9 @@ class TaskView: UIView {
             make.size.equalTo(25)
             make.centerY.equalTo(timerLable)
         }
+    }
+
+    func setup(name: String) {
+        titleLabel.text = name
     }
 }

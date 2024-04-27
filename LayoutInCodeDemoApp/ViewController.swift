@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     private let menuButton = UIButton()
     private let taskView = TaskView()
 
+    private let taskView2 = TaskView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,6 +25,7 @@ class ViewController: UIViewController {
         setupTaskLabel()
         setupMenuButton()
         setupTaskView()
+        setupTaskView2()
     }
 
     private func setupTaskLabel() {
@@ -53,9 +56,11 @@ class ViewController: UIViewController {
     private func setupTaskView() {
         view.addSubview(taskView)
 
+        taskView.setup(name: "taskView 1")
         taskView.action = {
             let viewController = UIViewController()
             viewController.view.backgroundColor = .red
+//            viewController.modalPresentationStyle = .fullScreen
 
             self.present(viewController, animated: true)
         }
@@ -63,6 +68,24 @@ class ViewController: UIViewController {
         taskView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(16)
             make.top.equalTo(taskLabel.snp.bottom).offset(24)
+        }
+    }
+
+    private func setupTaskView2() {
+        view.addSubview(taskView2)
+
+        taskView2.setup(name: "taskView 2")
+        taskView2.action = {
+            let viewController = UIViewController()
+            viewController.view.backgroundColor = .red
+//            viewController.modalPresentationStyle = .fullScreen
+
+            self.present(viewController, animated: true)
+        }
+
+        taskView2.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.top.equalTo(taskView.snp.bottom).offset(24)
         }
     }
 }
