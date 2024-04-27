@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
@@ -29,12 +30,11 @@ class ViewController: UIViewController {
 
         taskLabel.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         taskLabel.text = "Task"
-        taskLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate([
-            taskLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            taskLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-        ])
+        taskLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(40)
+        }
     }
 
     private func setupMenuButton() {
@@ -42,28 +42,28 @@ class ViewController: UIViewController {
 
         menuButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         menuButton.tintColor = .systemGray2
-        menuButton.translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate([
-            menuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            menuButton.centerYAnchor.constraint(equalTo: taskLabel.centerYAnchor),
-            menuButton.widthAnchor.constraint(equalToConstant: 25),
-            menuButton.heightAnchor.constraint(equalToConstant: 25),
-        ])
+        menuButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalTo(taskLabel)
+            make.size.equalTo(25)
+        }
     }
 
     private func setupTaskView() {
         view.addSubview(taskView)
 
-        taskView.translatesAutoresizingMaskIntoConstraints = false
+        taskView.action = {
+            let viewController = UIViewController()
+            viewController.view.backgroundColor = .red
 
-        NSLayoutConstraint.activate([
-            taskView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            taskView.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: 24),
-            taskView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            self.present(viewController, animated: true)
+        }
 
-            taskView.heightAnchor.constraint(equalToConstant: 114)
-        ])
+        taskView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.top.equalTo(taskLabel.snp.bottom).offset(24)
+        }
     }
 }
 

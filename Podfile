@@ -1,5 +1,6 @@
 target 'LayoutInCodeDemoApp' do
 
-	pod 'SnapKit'
+  use_frameworks!
+  pod 'SnapKit', '~> 5.6.0'
 
 end
